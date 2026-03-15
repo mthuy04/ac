@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clinical Formulary - iHeal</title>
+  <meta name="description" content="Explore our clinical formulary of clean, symptom-guided wellness supplements." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary-green: #2f5d4b;
+      --primary-green-2: #356c56;
+      --primary-green-deep: #234739;
+      --cta-red: #d65a4a;
+      --cta-red-deep: #c94d3d;
+      --accent-cyan: #1fb6d5;
+      --bg-cream: #faf7f2;
+      --bg-light: #f7f4ef;
+      --white: #ffffff;
+      --text-dark: #111111;
+      --text-muted: #5a5a5a;
+      --line: #e9e4dd;
+      --gold: #9b6b16;
+
+      --shadow-sm: 0 10px 24px rgba(17, 17, 17, 0.05);
+      --shadow-md: 0 20px 40px rgba(47, 93, 75, 0.08);
+      --shadow-lg: 0 30px 60px rgba(47, 93, 75, 0.12);
+
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+
+      --max-width: 1280px;
+      --transition: 0.3s ease;
+      --sidebar-width: 260px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg-cream);
+      color: var(--text-dark);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+    img { max-width: 100%; display: block; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button { border: none; background: none; cursor: pointer; }
+    :focus-visible { outline: 2px solid var(--primary-green); outline-offset: 2px; border-radius: 4px; }
+
+    .container { width: min(92%, var(--max-width)); margin: 0 auto; }
+    
+    h1, h2, h3, h4, .cormorant-text, .price { font-family: "Cormorant Garamond", serif; font-weight: 600; }
+    .french-vibe { font-style: italic; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 48px; padding: 10px 24px; border-radius: 999px;
+      font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+      transition: all var(--transition); border: 1px solid transparent;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--cta-red); color: var(--white); box-shadow: 0 10px 20px rgba(214, 90, 74, 0.2); }
+    .btn-primary:hover { background: var(--cta-red-deep); box-shadow: 0 14px 28px rgba(214, 90, 74, 0.3); }
+    .btn-outline { background: rgba(255, 255, 255, 0.9); border-color: rgba(47, 93, 75, 0.2); color: var(--primary-green); }
+    .btn-outline:hover { background: var(--primary-green); color: var(--white); }
+
+    /* HEADER */
+    .promo-bar { background: var(--primary-green); color: var(--white); text-align: center; padding: 10px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+    header { position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(233, 228, 221, 0.8); box-shadow: 0 4px 20px rgba(17, 17, 17, 0.03); }
+    .header-wrap { min-height: 80px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 20px; }
+    .logo-box h2 { margin: 0; font-size: 28px; line-height: 1; color: var(--primary-green); letter-spacing: -0.5px; }
+    .logo-tag { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-left: 2px; font-family: "Inter", sans-serif; }
+    .nav { display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .nav a { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-dark); padding: 8px; transition: color var(--transition); }
+    .nav a:hover, .nav a.active { color: var(--primary-green); }
+    .mix-save-link { color: var(--cta-red) !important; }
+    .header-actions { display: flex; align-items: center; gap: 12px; }
+    .header-icon-link { font-size: 12px; color: var(--text-dark); font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; }
+
+    /* BREADCRUMB & HEADER SECTION */
+    .page-header { padding: 40px 0; border-bottom: 1px solid var(--line); background: var(--bg-light); text-align: center; }
+    .breadcrumb { display: flex; justify-content: center; gap: 8px; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+    .breadcrumb a { color: var(--primary-green); transition: var(--transition); }
+    .breadcrumb a:hover { color: var(--cta-red); }
+    .breadcrumb span { opacity: 0.5; }
+    .page-title { font-size: clamp(38px, 5vw, 56px); color: var(--primary-green); margin-bottom: 12px; }
+    .page-desc { max-width: 600px; margin: 0 auto; color: var(--text-muted); font-size: 15px; }
+
+    .trust-strip{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.modal{
+  position: fixed;
+  inset: 0;
+  background: rgba(17,17,17,0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 1200;
+}
+
+.modal.is-open{
+  display: flex;
+}
+
+.modal-panel{
+  width: min(960px, 100%);
+  background: var(--white);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.modal-close{
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--text-muted);
+}
+
+.modal-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.modal-image-wrap{
+  background: linear-gradient(180deg, rgba(255,255,255,1), rgba(247,244,239,0.9));
+  border-radius: 20px;
+  padding: 24px;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-image-wrap img{
+  max-height: 360px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.modal-badge{
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(47,93,75,0.08);
+  color: var(--primary-green);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+}
+
+.modal-title{
+  font-size: clamp(30px, 4vw, 44px);
+  color: var(--primary-green);
+  line-height: 1.05;
+  margin-bottom: 8px;
+}
+
+.modal-subtitle{
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--primary-green);
+  margin-bottom: 10px;
+}
+
+.modal-rating{
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.modal-copy{
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.modal-meta{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.modal-price-row{
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.subscribe-note{
+  font-size: 13px;
+  color: var(--cta-red);
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.modal-actions{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+body.modal-open{
+  overflow: hidden;
+}
+
+@media (max-width: 768px){
+  .modal-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .modal-panel{
+    padding: 20px;
+  }
+}
+
+.trust-chip{
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(47,93,75,0.06);
+  color: var(--primary-green);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border: 1px solid rgba(47,93,75,0.08);
+}
+
+.listing-guide-cta{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+    .btn-signin{
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--primary-green);
+  border: 1px solid rgba(47,93,75,0.22);
+  background: transparent;
+  transition: all var(--transition);
+}
+
+.btn-signin:hover{
+  background: rgba(47,93,75,0.06);
+  border-color: rgba(47,93,75,0.38);
+  transform: translateY(-1px);
+}
+
+.btn-join{
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--primary-green);
+  border: 1px solid var(--primary-green);
+  transition: all var(--transition);
+}
+
+.btn-join:hover{
+  background: var(--primary-green-deep);
+  border-color: var(--primary-green-deep);
+  transform: translateY(-1px);
+}
+
+.cart-link{
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dark);
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+
+.cart-link:hover{
+  background: rgba(47,93,75,0.08);
+  color: var(--primary-green);
+  transform: translateY(-1px);
+}
+
+.cart-icon{
+  width: 22px;
+  height: 22px;
+}
+
+.cart-count{
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--cta-red);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-link{
+  color: var(--primary-green) !important;
+}
+
+@media (max-width: 768px){
+  .header-actions{
+    gap: 8px;
+  }
+
+  .btn-signin,
+  .btn-join{
+    display: none;
+  }
+}
+    /* SHOP LAYOUT */
+    .shop-container { display: grid; grid-template-columns: var(--sidebar-width) minmax(0, 1fr); gap: 40px; padding: 48px 0 80px; align-items: start; }
+    
+    /* SIDEBAR FILTERS */
+    .shop-sidebar { position: sticky; top: 100px; }
+    .filter-group { margin-bottom: 32px; border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+    .filter-group:last-child { border-bottom: none; }
+    .filter-title { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-green); margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+    
+    .filter-list { display: flex; flex-direction: column; gap: 12px; }
+    .filter-label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; color: var(--text-muted); transition: var(--transition); }
+    .filter-label:hover { color: var(--primary-green); }
+    .filter-checkbox { width: 16px; height: 16px; border: 1px solid rgba(47,93,75,0.3); border-radius: 4px; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+    input[type="checkbox"] { display: none; }
+    input[type="checkbox"]:checked + .filter-label .filter-checkbox { background: var(--primary-green); border-color: var(--primary-green); }
+    input[type="checkbox"]:checked + .filter-label .filter-checkbox::after { content: "✓"; color: white; font-size: 10px; font-weight: bold; }
+    input[type="checkbox"]:checked + .filter-label { color: var(--primary-green); font-weight: 600; }
+    .filter-count { margin-left: auto; font-size: 12px; opacity: 0.5; }
+
+    /* MAIN CONTENT & TOPBAR */
+    .shop-topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+    .results-count { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+    .sort-box { display: flex; align-items: center; gap: 12px; }
+    .sort-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--primary-green); }
+    .sort-select { padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(47,93,75,0.2); background: transparent; font-size: 14px; color: var(--text-dark); cursor: pointer; outline: none; }
+
+    /* PRODUCT GRID & CARDS (Inherited from Premium Homepage) */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 32px; }
+    .product-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(251,249,245,0.94)); border-radius: var(--radius-lg); padding: 32px 24px 24px; text-align: center; box-shadow: var(--shadow-sm); border: 1px solid rgba(17, 17, 17, 0.03); transition: transform var(--transition), box-shadow var(--transition); position: relative; display: flex; flex-direction: column;
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(47,93,75,0.1); }
+    
+    .product-badge { position: absolute; top: 16px; left: 16px; padding: 6px 12px; border-radius: 4px; background: rgba(214, 90, 74, 0.1); color: var(--cta-red); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 2; }
+    .trust-badges-mini { position: absolute; top: 16px; right: 16px; display: flex; flex-direction: column; gap: 6px; z-index: 2; }
+    .trust-badge-mini { font-size: 9px; font-weight: 800; padding: 4px 8px; border-radius: 4px; background: rgba(255,255,255,0.95); color: var(--primary-green); text-transform: uppercase; border: 1px solid rgba(47,93,75,0.1); }
+
+    .product-image { width: 100%; height: 220px; object-fit: contain; margin-bottom: 20px; transition: transform .5s ease; mix-blend-mode: multiply; }
+    .product-card:hover .product-image { transform: scale(1.05); }
+
+    .product-title { font-size: 28px; line-height: 1.1; color: var(--primary-green); margin-bottom: 6px; }
+    .product-subtitle { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-green); margin-bottom: 12px; }
+    
+    .product-specs { font-family: "Inter", sans-serif; font-size: 12px; color: var(--text-muted); margin-bottom: 12px; display: flex; justify-content: center; gap: 8px; }
+    .product-meta { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .meta-pill { padding: 5px 8px; border-radius: 4px; background: rgba(47, 93, 75, 0.05); color: var(--primary-green); font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; }
+    
+    .product-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; flex-grow: 1; padding: 0 4px; }
+
+    .product-price-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; margin-bottom: 16px; background: rgba(47,93,75,0.02); padding: 10px; border-radius: var(--radius-sm); border: 1px solid rgba(47,93,75,0.05); }
+    .price { font-size: 26px; font-weight: 600; color: var(--primary-green); line-height: 1; }
+    .price-note { font-size: 11px; color: var(--cta-red); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .product-actions { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .product-actions .btn { min-height: 44px; padding: 10px; }
+
+    /* PAGINATION */
+    .pagination { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 64px; }
+    .page-num { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 14px; font-weight: 600; color: var(--text-dark); transition: var(--transition); border: 1px solid transparent; }
+    .page-num:hover { background: rgba(47,93,75,0.05); }
+    .page-num.active { background: var(--primary-green); color: var(--white); box-shadow: var(--shadow-sm); }
+    .page-nav { padding: 0 16px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-green); transition: var(--transition); }
+    .page-nav:hover { color: var(--cta-red); }
+
+    /* FOOTER */
+    footer { background: #1a3a32; color: var(--white); padding: 80px 0 30px; margin-top: 60px; }
+    .footer-partners { display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; padding-bottom: 40px; margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-col h4 { font-size: 16px; color: #a3b8b0; margin-bottom: 24px; font-family: "Inter", sans-serif; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .footer-col a { display: block; color: rgba(255, 255, 255, 0.7); margin-bottom: 16px; font-size: 14px; transition: color var(--transition); }
+    .footer-col a:hover { color: var(--white); }
+    .medical-disclaimer { border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 24px 0; margin-bottom: 24px; font-size: 11px; color: rgba(255,255,255,0.5); text-align: center; line-height: 1.6; }
+
+    @media (max-width: 1024px) {
+      .shop-container { grid-template-columns: 1fr; }
+      .shop-sidebar { display: none; } /* On mobile, filters should be a slide-out drawer */
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .header-wrap { grid-template-columns: auto 1fr auto; }
+      .nav { display: none; }
+      .product-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="promo-bar">Clinical Wellness System • Free Shipping over $100 • Mix & Save 15%</div>
+
+  <header>
+    <div class="container header-wrap">
+      <a href="index.html" class="logo-box">
+        <h2 class="cormorant-text">iHEAL</h2>
+        <span class="logo-tag">Clinical System</span>
+      </a>
+
+      <nav class="nav">
+        <a href="product-listing.html" class="active">Shop Formulary</a>
+        <a href="#">Shop by Concern</a>
+        <a href="#" class="highlight-link">Symptom Quiz</a>
+        <a href="#" class="mix-save-link">Mix & Save</a>
+        <a href="#">Our Science</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#signin" class="btn btn-signin">Sign In</a>
+        <a href="#join" class="btn btn-join">Join</a>
+      
+        <a href="#cart" class="cart-link" id="cart-button" aria-label="Shopping cart">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="cart-icon">
+            <path d="M3 5h2l2.2 9.2a1 1 0 0 0 .97.78h8.98a1 1 0 0 0 .97-.76L21 7H7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="10" cy="19" r="1.6" fill="currentColor"/>
+            <circle cx="17" cy="19" r="1.6" fill="currentColor"/>
+          </svg>
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span style="color: var(--primary-green);">Formulary</span>
+      </div>
+  
+      <h1 class="page-title">Clinical Formulary</h1>
+      <p class="page-desc">
+        Explore rigorously selected formulas designed to support symptom-led wellness routines,
+        cleaner protocols, and more intentional daily care.
+      </p>
+  
+      <div class="trust-strip">
+        <span class="trust-chip">Clean Label</span>
+        <span class="trust-chip">Vegan Options</span>
+        <span class="trust-chip">Non-GMO</span>
+        <span class="trust-chip">Protocol-Based</span>
+      </div>
+  
+      <div class="listing-guide-cta">
+        <span>Not sure where to begin?</span>
+        <a href="#quiz" class="btn btn-outline">Take the Symptom Quiz</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="container shop-container">
+    
+    <aside class="shop-sidebar">
+        <div class="filter-group">
+          <div class="filter-title">By Concern</div>
+          <div class="filter-list">
+            <label class="filter-label"><input type="checkbox" value="energy" class="filter-cb"><div class="filter-checkbox"></div>Energy & Fatigue <span class="filter-count">(8)</span></label>
+            <label class="filter-label"><input type="checkbox" value="calm" class="filter-cb"><div class="filter-checkbox"></div>Sleep & Calm <span class="filter-count">(7)</span></label>
+            <label class="filter-label"><input type="checkbox" value="immunity" class="filter-cb"><div class="filter-checkbox"></div>Immunity <span class="filter-count">(6)</span></label>
+            <label class="filter-label"><input type="checkbox" value="gut" class="filter-cb"><div class="filter-checkbox"></div>Gut Balance <span class="filter-count">(4)</span></label>
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-title">Delivery Format</div>
+          <div class="filter-list">
+            <label class="filter-label"><input type="checkbox" value="liquid" class="filter-cb"><div class="filter-checkbox"></div>Liquid Extracts <span class="filter-count">(12)</span></label>
+            <label class="filter-label"><input type="checkbox" value="capsule" class="filter-cb"><div class="filter-checkbox"></div>Vegan Capsules <span class="filter-count">(9)</span></label>
+            <label class="filter-label"><input type="checkbox" value="powder" class="filter-cb"><div class="filter-checkbox"></div>Powder Blends <span class="filter-count">(3)</span></label>
+          </div>
+        </div>
+        <div class="filter-group">
+            <div class="filter-title">By Ingredient</div>
+            <div class="filter-list">
+              <label class="filter-label">
+                <input type="checkbox" value="b12" class="filter-cb ingredient-filter">
+                <div class="filter-checkbox"></div>
+                B12
+                <span class="filter-count">4</span>
+              </label>
+          
+              <label class="filter-label">
+                <input type="checkbox" value="zinc" class="filter-cb ingredient-filter">
+                <div class="filter-checkbox"></div>
+                Zinc
+                <span class="filter-count">3</span>
+              </label>
+          
+              <label class="filter-label">
+                <input type="checkbox" value="lemon-balm" class="filter-cb ingredient-filter">
+                <div class="filter-checkbox"></div>
+                Lemon Balm
+                <span class="filter-count">2</span>
+              </label>
+          
+              <label class="filter-label">
+                <input type="checkbox" value="spirulina" class="filter-cb ingredient-filter">
+                <div class="filter-checkbox"></div>
+                Spirulina
+                <span class="filter-count">1</span>
+              </label>
+            </div>
+          </div>
+      </aside>
+
+    <div class="shop-main">
+      
+      <div class="shop-topbar">
+        <div class="results-count">Showing 1–9 of 24 clinical formulas</div>
+        <div class="sort-box">
+          <span class="sort-label">Sort by:</span>
+          <select class="sort-select" id="sort-select">
+            <option value="relevance">Clinical Relevance</option>
+            <option value="bestsellers">Best Sellers</option>
+            <option value="low-high">Price: Low to High</option>
+            <option value="high-low">Price: High to Low</option>
+            <option value="newest">Newest</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="product-grid" id="product-grid">
+        <article
+  class="product-card"
+  data-price="34"
+  data-concern="energy"
+  data-format="liquid"
+  data-ingredient="b12"
+  data-product='{
+    "title":"Organic Liquid B12",
+    "price":"$34.00",
+    "description":"Highly bioavailable B12 designed to nourish nerves and support natural energy.",
+    "image":"image copy 6.png",
+    "badge":"Essential",
+    "subtitle":"Neurological Support",
+    "rating":"★★★★★ · 126 reviews",
+    "note":"One-time purchase",
+    "subscribe":"Mix & Save from $28.90",
+    "tags":["USDA Organic","Liquid Form","Energy Support"]
+  }'>
+          <div class="product-badge">Essential</div>
+          <div class="trust-badges-mini"><span class="trust-badge-mini">USDA Organic</span><span class="trust-badge-mini">Liquid Form</span></div>
+          <img src="image copy 6.png" alt="Liquid B12" class="product-image quick-view" style="cursor:pointer;" onerror="this.src='https://via.placeholder.com/300x400/ffffff/1A3A32?text=Liquid+B12';" />
+          <h3 class="cormorant-text product-title">Organic Liquid B12</h3>
+          <div class="product-subtitle">Neurological Support</div>
+          <div class="product-specs"><span>500mcg</span><span>•</span><span>115 servings</span></div>
+          <div class="product-price-wrap"><div class="price">$34.00</div><div class="price-note">Mix & Save: $28.90</div></div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-cart-btn">Add to Protocol</button>
+            <a href="product-detail.html" class="btn btn-outline">View Details</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-price="22" data-concern="calm" data-format="liquid" data-product='{"title":"Lemon Balm Extract","price":"$22.00","desc":"A soothing daily extract for nervous system steadiness and deep rest.","img":"image copy 4.png"}'>
+          <div class="product-badge" style="background: rgba(47,93,75,0.1); color: var(--primary-green);">Calm Support</div>
+          <div class="trust-badges-mini"><span class="trust-badge-mini">Alcohol-Free</span><span class="trust-badge-mini">Non-GMO</span></div>
+          <img src="image copy 4.png" alt="Lemon Balm" class="product-image quick-view" style="cursor:pointer;" onerror="this.src='https://via.placeholder.com/300x400/ffffff/1A3A32?text=Lemon+Balm';" />
+          <h3 class="cormorant-text product-title">Lemon Balm Extract</h3>
+          <div class="product-subtitle">Rest & Reset</div>
+          <div class="product-specs"><span>175mg</span><span>•</span><span>30 servings</span></div>
+          <div class="product-price-wrap"><div class="price">$22.00</div><div class="price-note">Mix & Save: $18.70</div></div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-to-cart">Add to Protocol</button>
+            <a href="product-detail.html" class="btn btn-outline">View Details</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-price="28" data-concern="immunity" data-format="capsule" data-product='{"title":"Zinc Sulfate","price":"$28.00","desc":"Essential trace mineral support for robust immune defense and inflammatory response.","img":"image copy 5.png"}'>
+          <div class="trust-badges-mini"><span class="trust-badge-mini">Vegan Caps</span><span class="trust-badge-mini">Clean Label</span></div>
+          <img src="image copy 5.png" alt="Zinc" class="product-image quick-view" style="cursor:pointer;" onerror="this.src='https://via.placeholder.com/300x400/ffffff/1A3A32?text=Zinc+Sulfate';" />
+          <h3 class="cormorant-text product-title">Zinc Sulfate</h3>
+          <div class="product-subtitle">Immune Response</div>
+          <div class="product-specs"><span>15mg</span><span>•</span><span>60 capsules</span></div>
+          <div class="product-price-wrap"><div class="price">$28.00</div><div class="price-note">Mix & Save: $23.80</div></div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-cart-btn">Add to Protocol</button>
+            <a href="product-detail.html" class="btn btn-outline">View Details</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-price="36" data-concern="immunity" data-format="liquid" data-product='{"title":"Cat&apos;s Claw Extract","price":"$36.00","desc":"Powerful herbal support designed to assist the body&apos;s natural defense systems.","img":"image copy 6.png"}'>
+          <div class="trust-badges-mini"><span class="trust-badge-mini">USDA Organic</span><span class="trust-badge-mini">Liquid Form</span></div>
+          <img src="image copy 6.png" alt="Cat's Claw" class="product-image quick-view" style="cursor:pointer;" onerror="this.src='https://via.placeholder.com/300x400/ffffff/1A3A32?text=Cat%27s+Claw';" />
+          <h3 class="cormorant-text product-title">Cat's Claw Extract</h3>
+          <div class="product-subtitle">Pathogen Defense</div>
+          <div class="product-specs"><span>10:1 Extract</span><span>•</span><span>30 servings</span></div>
+          <div class="product-price-wrap"><div class="price">$36.00</div><div class="price-note">Mix & Save: $30.60</div></div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-cart-btn">Add to Protocol</button>
+            <a href="product-detail.html" class="btn btn-outline">View Details</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-price="32" data-concern="gut" data-format="powder" data-product='{"title":"Spirulina Powder","price":"$32.00","desc":"Nutrient-rich algae support for heavy metal protocols and daily vitality.","img":"image copy 5.png"}'>
+          <div class="product-badge" style="background: rgba(47,93,75,0.1); color: var(--primary-green);">Gut Health</div>
+          <div class="trust-badges-mini"><span class="trust-badge-mini">Vegan Caps</span><span class="trust-badge-mini">Non-GMO</span></div>
+          <img src="image copy 5.png" alt="Spirulina" class="product-image quick-view" style="cursor:pointer;" onerror="this.src='https://via.placeholder.com/300x400/ffffff/1A3A32?text=Spirulina';" />
+          <h3 class="cormorant-text product-title">Spirulina Powder</h3>
+          <div class="product-subtitle">Heavy Metal Detox</div>
+          <div class="product-specs"><span>3g / serving</span><span>•</span><span>50 servings</span></div>
+          <div class="product-price-wrap"><div class="price">$32.00</div><div class="price-note">Mix & Save: $27.20</div></div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-cart-btn">Add to Protocol</button>
+            <a href="product-detail.html" class="btn btn-outline">View Details</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-price="24" data-concern="calm" data-format="liquid" data-product='{"title":"Nettle Leaf Extract","price":"$24.00","desc":"Gentle daily support to help manage seasonal responses and support liver health.","img":"image copy 4.png"}'>
+          <div class="trust-badges-mini"><span class="trust-badge-mini">USDA Organic</span><span class="trust-badge-mini">Alcohol-Free</span></div>
+          <img src="image copy 4.png" alt="Nettle Leaf" class="product-image quick-view" style="cursor:pointer;" onerror="this.src='https://via.placeholder.com/300x400/ffffff/1A3A32?text=Nettle+Leaf';" />
+          <h3 class="cormorant-text product-title">Nettle Leaf Extract</h3>
+          <div class="product-subtitle">Allergy & Inflammation</div>
+          <div class="product-specs"><span>200mg</span><span>•</span><span>30 servings</span></div>
+          <div class="product-price-wrap"><div class="price">$24.00</div><div class="price-note">Mix & Save: $20.40</div></div>
+          <div class="product-actions">
+            <button class="btn btn-primary add-cart-btn">Add to Protocol</button>
+            <a href="product-detail.html" class="btn btn-outline">View Details</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="pagination">
+        <a href="#" class="page-nav" style="opacity: 0.5; pointer-events: none;">Prev</a>
+        <a href="#" class="page-num active">1</a>
+        <a href="#" class="page-num">2</a>
+        <a href="#" class="page-num">3</a>
+        <span style="color: var(--text-muted);">...</span>
+        <a href="#" class="page-num">8</a>
+        <a href="#" class="page-nav">Next</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-partners">
+        <h4 style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0;">Verified By:</h4>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FDA_logo.svg/1200px-FDA_logo.svg.png" style="height: 30px; filter: grayscale(100%) brightness(200%); opacity: 0.8;" alt="FDA Facility">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/USDA_organic_seal.svg/1200px-USDA_organic_seal.svg.png" style="height: 54px; filter: grayscale(100%) brightness(200%); opacity: 0.8;" alt="USDA Organic">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Non-GMO_Project_Verified_Seal.svg/1200px-Non-GMO_Project_Verified_Seal.svg.png" style="height: 54px; filter: grayscale(100%) brightness(200%); opacity: 0.8;" alt="Non GMO Verified">
+
+      </div>
+      
+      <div class="medical-disclaimer">
+        <b>MEDICAL DISCLAIMER:</b> The information provided by the iHeal system is for educational purposes only. These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease. Always consult with a qualified healthcare professional before starting any new wellness protocol.
+      </div>
+
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h2 class="cormorant-text" style="font-size: 32px; color: var(--white); margin-bottom: 12px;">iHEAL</h2>
+          <p class="footer-mission" style="margin-bottom: 8px;">
+            Transitioning holistic concepts into systematic realities. Thoughtful, clean wellness support designed for clarity and trust.
+          </p>
+          <p class="footer-mission french-vibe">Your True Companion.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Clinical Shop</h4>
+          <a href="#">All Formulas</a>
+          <a href="#">Liquid Extracts</a>
+          <a href="#">Vegan Capsules</a>
+          <a href="#">Systematic Bundles</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Knowledge Base</h4>
+          <a href="#">Research Journal</a>
+          <a href="#">Ingredient Science</a>
+          <a href="#">Clinical Protocols</a>
+          <a href="#">System FAQ</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Patient Support</h4>
+          <a href="#">CRM Account</a>
+          <a href="#">30-Day Return Policy</a>
+          <a href="#">Shipping Details</a>
+          <a href="#">Advisory Contact</a>
+        </div>
+      </div>
+
+      <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; margin-top: 24px;">
+        <p style="font-size: 12px; color: rgba(255,255,255,0.5);">&copy; 2026 iHeal Clinical Wellness System. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal" id="quick-view-modal" aria-hidden="true">
+    <div class="modal-panel">
+      <button class="modal-close" type="button" id="modal-close" aria-label="Close quick view">×</button>
+      <div class="modal-grid">
+        <div class="modal-image-wrap">
+          <img id="modal-image" src="" alt="Product preview" />
+        </div>
+        <div>
+          <div class="modal-badge" id="modal-badge">Best Seller</div>
+          <h3 class="modal-title" id="modal-title">Liquid B12</h3>
+          <div class="modal-subtitle" id="modal-subtitle">Energy & Brain Support</div>
+          <div class="modal-rating" id="modal-rating">★★★★★ · 126 reviews</div>
+          <p class="modal-copy" id="modal-copy"></p>
+          <div class="modal-meta" id="modal-meta"></div>
+          <div class="modal-price-row">
+            <div class="price" id="modal-price">$34.00</div>
+            <div class="price-note" id="modal-note">One-time</div>
+          </div>
+          <div class="subscribe-note" id="modal-subscribe">Subscribe & save 10%</div>
+          <div class="modal-actions">
+            <button class="btn btn-primary" type="button" id="modal-add-cart">Add to Bag</button>
+            <button class="btn btn-outline" type="button" id="modal-ask-guide">Ask iHeal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const productGrid = document.getElementById('product-grid');
+      const productCards = Array.from(document.querySelectorAll('.product-card'));
+      const sortSelect = document.getElementById('sort-select');
+      const concernFilters = Array.from(document.querySelectorAll('.filter-cb:not(.ingredient-filter)'));
+      const ingredientFilters = Array.from(document.querySelectorAll('.ingredient-filter'));
+      const cartCountEl = document.getElementById('cart-count');
+    
+      const modal = document.getElementById('quick-view-modal');
+      const modalClose = document.getElementById('modal-close');
+      const modalImage = document.getElementById('modal-image');
+      const modalBadge = document.getElementById('modal-badge');
+      const modalTitle = document.getElementById('modal-title');
+      const modalSubtitle = document.getElementById('modal-subtitle');
+      const modalRating = document.getElementById('modal-rating');
+      const modalCopy = document.getElementById('modal-copy');
+      const modalMeta = document.getElementById('modal-meta');
+      const modalPrice = document.getElementById('modal-price');
+      const modalNote = document.getElementById('modal-note');
+      const modalSubscribe = document.getElementById('modal-subscribe');
+    
+      let cartCount = 0;
+    
+      function getCheckedValues(filters) {
+        return filters.filter(f => f.checked).map(f => f.value);
+      }
+    
+      function filterProducts() {
+        const selectedConcerns = getCheckedValues(concernFilters);
+        const selectedIngredients = getCheckedValues(ingredientFilters);
+    
+        productCards.forEach(card => {
+          const cardConcern = card.dataset.concern;
+          const cardIngredient = card.dataset.ingredient || '';
+          const concernMatch = selectedConcerns.length === 0 || selectedConcerns.includes(cardConcern);
+          const ingredientMatch = selectedIngredients.length === 0 || selectedIngredients.includes(cardIngredient);
+    
+          card.style.display = concernMatch && ingredientMatch ? 'flex' : 'none';
+        });
+      }
+    
+      function sortProducts() {
+        const value = sortSelect.value;
+        const cards = Array.from(productCards);
+    
+        cards.sort((a, b) => {
+          const priceA = parseFloat(a.dataset.price || '0');
+          const priceB = parseFloat(b.dataset.price || '0');
+    
+          if (value === 'low-high') return priceA - priceB;
+          if (value === 'high-low') return priceB - priceA;
+          if (value === 'newest') return cards.indexOf(b) - cards.indexOf(a);
+          return 0;
+        });
+    
+        cards.forEach(card => productGrid.appendChild(card));
+      }
+    
+      function openModal(card) {
+        const raw = card.getAttribute('data-product');
+        if (!raw) return;
+    
+        const data = JSON.parse(raw);
+    
+        modalImage.src = data.image;
+        modalImage.alt = data.title;
+        modalImage.onerror = function () {
+          this.src = 'https://via.placeholder.com/600x700/ffffff/2F5D4B?text=' + encodeURIComponent(data.title);
+        };
+    
+        modalBadge.textContent = data.badge || 'Featured';
+        modalTitle.textContent = data.title || '';
+        modalSubtitle.textContent = data.subtitle || '';
+        modalRating.textContent = data.rating || '★★★★★ · Trusted formula';
+        modalCopy.textContent = data.description || '';
+        modalPrice.textContent = data.price || '';
+        modalNote.textContent = data.note || 'One-time purchase';
+        modalSubscribe.textContent = data.subscribe || 'Mix & Save available';
+    
+        modalMeta.innerHTML = '';
+        (data.tags || []).forEach(tag => {
+          const span = document.createElement('span');
+          span.className = 'meta-pill';
+          span.textContent = tag;
+          modalMeta.appendChild(span);
+        });
+    
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+      }
+    
+      function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+      }
+    
+      concernFilters.forEach(filter => {
+        filter.addEventListener('change', filterProducts);
+      });
+    
+      ingredientFilters.forEach(filter => {
+        filter.addEventListener('change', filterProducts);
+      });
+    
+      sortSelect.addEventListener('change', sortProducts);
+    
+      document.querySelectorAll('.quick-view-btn, .product-image.quick-view').forEach(el => {
+        el.addEventListener('click', (e) => {
+          const card = e.currentTarget.closest('.product-card');
+          openModal(card);
+        });
+      });
+    
+      document.querySelectorAll('.add-cart-btn, #modal-add-cart').forEach(btn => {
+        btn.addEventListener('click', () => {
+          cartCount += 1;
+          cartCountEl.textContent = cartCount;
+          if (btn.id === 'modal-add-cart') closeModal();
+        });
+      });
+    
+      modalClose.addEventListener('click', closeModal);
+    
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+    
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+          closeModal();
+        }
+      });
+    });
+    </script>
+</body>
+</html>
